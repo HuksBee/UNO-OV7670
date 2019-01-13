@@ -142,6 +142,10 @@ void QVGA_Image(String title){
   int h,w;
   
   File dataFile = SD.open(title, FILE_WRITE);
+  if (dataFile != NULL)
+    Serial.println("Criou Arquivo");
+  else
+    Serial.println("Nao criou");
   while (!(PIND & 8));//wait for high
   while ((PIND & 8));//wait for low
 
@@ -166,7 +170,8 @@ void QVGA_Image(String title){
 }
 
 void setup(){
- 
+  Serial.begin(115200);
+  Serial.println("Aqui1");
   noInterrupts(); //Disable all interrupts
   XCLK_SETUP();   //Setup 8MHz clock at pin 11
   OV7670_PINS();  // Setup Data-in and interrupt pins from camera
@@ -174,14 +179,14 @@ void setup(){
   TWI_SETUP();    // Setup SCL for 100KHz
   interrupts();
   Wire.begin();
-  
+  Serial.println("Comecou");
   
   Init_OV7670();
   Init_QVGA();
   Init_YUV422();
   WriteOV7670(0x11, 0x1F); //Range 00-1F
   noInterrupts();
-  Serial.begin(9600);
+
   pinMode(CS_Pin, OUTPUT);
   SD.begin(CS_Pin);
  
@@ -189,12 +194,19 @@ void setup(){
 
 
 void loop(){
+  Serial.flush();
   QVGA_Image("0.bmp");
+  Serial.flush();
   QVGA_Image("1.bmp");
+  Serial.flush();
   QVGA_Image("2.bmp");
+  Serial.flush();
   QVGA_Image("3.bmp");
+  Serial.flush();
   QVGA_Image("4.bmp");
+  Serial.flush();
   QVGA_Image("5.bmp");
+  Serial.flush();
   QVGA_Image("6.bmp");
   QVGA_Image("7.bmp");
   QVGA_Image("8.bmp");
