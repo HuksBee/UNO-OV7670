@@ -1,17 +1,5 @@
 
 
-/*
-OV7670 Camera module with SD card module
-on Arduino Uno.
- 
-Author: Hardik Kalasua (hardik.kalasua@gmail.com)
-NOTE: Much of the code is based on insights from the
-work of the user named ComputerNerd.
-NOTE: OV7670 SCCB interface does't work if XCLK not provided.
-
-** Thanks to all the android forums and stack exchange answers. :)
-*/
-
 
 #include <Wire.h>
 #include <SD.h>
